@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+int main (void)
+{
+
+    FILE *in = fopen ("triangle.txt", "r");
+
+    int i, j;
+    int triangle[15][15] = {0};
+    int maximum=0;
+
+    for (i=0; i<15; i++){
+        for (j=0; j<=i; j++){
+            fscanf (in, "%d", &triangle[i][j]);
+            printf ("%d ", triangle[i][j]);
+        }
+        printf ("\n");
+    }
+
+    for (i=0; i<15; i++){
+        for (j=0; j<=i; j++){
+            if (i == 0){
+                ;
+            }
+
+            else{
+                if (j==0){
+                    triangle[i][j] += triangle[i-1][j];
+                    printf ("%d ", triangle[i][j]);
+                }
+                else {
+                triangle[i][j] += triangle[i-1][j]> triangle[i-1][j-1] ? triangle [i-1][j] : triangle [i-1][j-1];
+                printf ("%d ", triangle[i][j]);
+                }
+            }
+        }
+        printf ("\n");
+    }
+
+    for (j=0; j<15; j++){
+        if (triangle[14][j] > maximum){
+            maximum = triangle[14][j];
+        }
+    }
+
+    printf ("Maximum is %d", maximum);
+}
